@@ -1,16 +1,19 @@
 [
     {
         "id": 1,
-        "name": "くようせいじ",
-        "category": "",
+        "kana": "くようせいじ", 
+        "name": "九曜 誠司", 
 
-        "description": "いちごが大好き。",
         "thumb": "face/kuyou.png",
         "image": "images/kuyou.png",
-        "birthday": "4月12日",
-        "likes": "もち",
-        "personality": "おっとり",
-        "profile": "高校生"
+
+        "likes": "ようかん", 
+
+        "job": "高校生"
+        "profile": "こうこうこういう人物である"
+         "story": "通過したシナリオ" 
+
+
     },
     {
 
