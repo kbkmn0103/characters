@@ -1,36 +1,25 @@
 [
-    {
-        "id": 1,
-        "kana": "くようせいじ", 
-        "name": "九曜 誠司", 
+{
+  "id": 1,
+  "kana": "くようせいじ",
+  "name": "九曜 誠司",
+  "thumb": "face/kuyou.png",
+  "image": "images/kuyou.png",
+  "likes": "ようかん",
+  "job": "高校生",
+  "profile": "こうこうこういう人物である",
+  "story": "通過したシナリオ"
+},
 
-        "thumb": "face/kuyou.png",
-        "image": "images/kuyou.png",
-
-        "likes": "ようかん", 
-
-        "job": "高校生"
-        "profile": "こうこうこういう人物である"
-         "story": "通過したシナリオ" 
-
-
-    },
-      {
-        "id": 2,
-        "kana": "くようせいじ", 
-        "name": "九曜 誠司", 
-
-        "thumb": "face/kuyou.png",
-        "image": "images/kuyou.png",
-
-        "likes": "ようかん", 
-
-        "job": "高校生"
-        "profile": "こうこうこういう人物である"
-         "story": "通過したシナリオ" 
-
-
-    },
-
-
+{
+  "id": 2,
+  "kana": "くようせいじ",
+  "name": "九曜 誠司",
+  "thumb": "face/kuyou.png",
+  "image": "images/kuyou.png",
+  "likes": "ようかん",
+  "job": "高校生",
+  "profile": "こうこうこういう人物である",
+  "story": "通過したシナリオ"
+}
 ]
