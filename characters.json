@@ -9,6 +9,18 @@
         "likes": "もち",
         "personality": "おっとり",
         "profile": "高校生"
+    },
+{
+        "id": 2,
+        "name": "くようせいじ",
+        "category": "",
+        "description": "いちごが大好き。",
+        "image": "images/kuyou.png",
+        "birthday": "4月12日",
+        "likes": "もち",
+        "personality": "おっとり",
+        "profile": "高校生"
     }
+
 
 ]

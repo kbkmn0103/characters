@@ -1,35 +1,43 @@
-/* ==========================
-   全体設定
-========================== */
+/*=====================================
+
+Character Archive
+
+======================================*/
 
 *{
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
 }
 
 body{
 
-    font-family: "M PLUS Rounded 1c", sans-serif;
+    background:#0b0b0b;
 
-    background:linear-gradient(
-        180deg,
-        #fff7fb,
-        #f8fbff
-    );
+    color:#e8e2d4;
 
-    color:#555;
-
-    min-height:100vh;
+    font-family:"Noto Serif JP",serif;
 
     overflow-x:hidden;
 
 }
 
 
-/* ==========================
+/*=====================================
+
 背景
-========================== */
+
+======================================*/
 
 .background{
 
@@ -37,422 +45,962 @@ body{
 
     inset:0;
 
-    z-index:-1;
+    z-index:-100;
 
     overflow:hidden;
 
+    background:
+
+    radial-gradient(circle at top,#222 0%,#111 35%,#080808 100%);
+
 }
 
-.circle{
+
+/* 暗い四隅 */
+
+.vignette{
 
     position:absolute;
 
-    border-radius:50%;
+    inset:0;
 
-    filter:blur(30px);
+    box-shadow:
 
-    opacity:.35;
-
-    animation:float 8s ease-in-out infinite;
-
-}
-
-.circle1{
-
-    width:260px;
-    height:260px;
-
-    background:#ffd6eb;
-
-    top:-80px;
-    left:-60px;
-
-}
-
-.circle2{
-
-    width:300px;
-    height:300px;
-
-    background:#d9f8ff;
-
-    right:-100px;
-    top:120px;
-
-}
-
-.circle3{
-
-    width:260px;
-    height:260px;
-
-    background:#efe1ff;
-
-    bottom:-90px;
-    left:35%;
-
-}
-
-@keyframes float{
-
-    0%{
-        transform:translateY(0px);
-    }
-
-    50%{
-        transform:translateY(-25px);
-    }
-
-    100%{
-        transform:translateY(0px);
-    }
+    inset 0 0 220px rgba(0,0,0,.95);
 
 }
 
 
-/* ==========================
+/* ノイズ */
+
+.noise{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.06;
+
+    background-image:
+
+    repeating-radial-gradient(circle,#ffffff22 0px,#00000000 2px);
+
+}
+
+
+/*=====================================
+
 ヘッダー
-========================== */
+
+======================================*/
 
 header{
 
-    text-align:center;
-
-    padding:60px 20px 40px;
-
-}
-
-.logo h1{
-
-    font-size:3rem;
-
-    color:#ff7aa8;
-
-    font-weight:800;
-
-}
-
-.logo p{
-
-    margin-top:12px;
-
-    color:#777;
-
-    font-size:1.1rem;
-
-}
-
-
-/* ==========================
-検索
-========================== */
-
-.search-area{
-
-    display:flex;
-
-    justify-content:center;
-
-    margin-bottom:35px;
-
-}
-
-#searchBox{
-
-    width:min(500px,90%);
-
-    padding:18px 22px;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:50px;
-
-    background:white;
-
-    font-size:17px;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-#searchBox:focus{
-
-    transform:scale(1.02);
-
-    box-shadow:
-        0 12px 35px rgba(255,122,168,.25);
-
-}
-
-
-/* ==========================
-カテゴリー
-========================== */
-
-.category-area{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:12px;
-
-    margin-bottom:45px;
-
-}
-
-.category{
-
-    border:none;
-
-    border-radius:999px;
-
-    padding:12px 24px;
-
-    background:white;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.25s;
-
-    box-shadow:
-        0 6px 16px rgba(0,0,0,.08);
-
-}
-
-.category:hover{
-
-    transform:translateY(-3px);
-
-}
-
-.category.active{
-
-    background:#ff9bc1;
-
-    color:white;
-
-}
-
-
-/* ==========================
-一覧
-========================== */
-
-main{
-
-    width:min(1250px,92%);
+    width:min(1200px,92%);
 
     margin:auto;
 
-    padding-bottom:80px;
+    padding:70px 0 50px;
 
-}
-
-.character-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
-
-    gap:30px;
+    border-bottom:1px solid #3c3228;
 
 }
 
 
-/* ==========================
-カード
-========================== */
+.sub{
 
-.character-card{
+    font-family:"Cinzel",serif;
 
-    background:white;
+    letter-spacing:8px;
 
-    border-radius:30px;
-
-    overflow:hidden;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:
-
-        0 12px 28px rgba(0,0,0,.08);
-
-}
-
-.character-card:hover{
-
-    transform:
-        translateY(-8px)
-        scale(1.03);
-
-    box-shadow:
-
-        0 18px 35px rgba(0,0,0,.12);
-
-}
-
-.character-image{
-
-    width:100%;
-
-    aspect-ratio:1/1;
-
-    background:#fafafa;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-.character-image img{
-
-    width:80%;
-
-    height:80%;
-
-    object-fit:contain;
-
-    transition:.35s;
-
-}
-
-.character-card:hover img{
-
-    transform:scale(1.06);
-
-}
-
-
-/* ==========================
-カード本文
-========================== */
-
-.character-info{
-
-    padding:20px;
-
-}
-
-.character-name{
-
-    font-size:22px;
-
-    font-weight:800;
-
-    color:#444;
-
-}
-
-.character-category{
-
-    margin-top:10px;
-
-    display:inline-block;
-
-    padding:6px 14px;
-
-    border-radius:999px;
-
-    background:#ffeef6;
-
-    color:#ff6699;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-.character-text{
-
-    margin-top:15px;
-
-    color:#888;
-
-    line-height:1.6;
+    color:#9c8663;
 
     font-size:14px;
 
 }
 
 
-/* ==========================
-フッター
-========================== */
+header h1{
 
-footer{
+    margin-top:12px;
 
-    text-align:center;
+    font-size:42px;
 
-    padding:30px;
+    font-weight:700;
 
-    color:#888;
+    color:#f1e7d0;
 
 }
 
 
-/* ==========================
-スマホ
-========================== */
+.description{
 
-@media(max-width:700px){
+    margin-top:12px;
 
-.logo h1{
+    color:#8b8173;
 
-    font-size:2.2rem;
+    letter-spacing:3px;
 
 }
+
+
+.system{
+
+    margin-top:25px;
+
+    color:#756652;
+
+    font-size:13px;
+
+    letter-spacing:3px;
+
+}
+
+
+/*=====================================
+
+検索
+
+======================================*/
+
+.search-area{
+
+    width:min(1200px,92%);
+
+    margin:40px auto;
+
+}
+
+
+#searchBox{
+
+    width:100%;
+
+    background:#161616;
+
+    border:1px solid #443728;
+
+    color:white;
+
+    padding:18px 22px;
+
+    font-size:16px;
+
+    border-radius:8px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+
+#searchBox:focus{
+
+    border-color:#8f6d43;
+
+    box-shadow:0 0 20px rgba(180,140,70,.2);
+
+}
+
+
+#searchBox::placeholder{
+
+    color:#6f6f6f;
+
+}
+
+
+/*=====================================
+
+一覧
+
+======================================*/
 
 .character-grid{
 
-    grid-template-columns:
-        repeat(2,1fr);
+    width:min(1200px,92%);
 
-    gap:18px;
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fill,minmax(320px,1fr));
+
+    gap:35px;
+
+    padding-bottom:80px;
 
 }
+
+
+
+
+/*=====================================
+
+調査ファイルカード
+
+======================================*/
+
+.character-card{
+
+    position:relative;
+
+    background:#d8ccb8;
+
+    color:#1d1d1d;
+
+    border-radius:6px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.45);
+
+    border:1px solid #8f7b5c;
+
+}
+
+
+/* 少し紙を傾ける */
+
+.character-card:nth-child(odd){
+
+    transform:rotate(-0.7deg);
+
+}
+
+.character-card:nth-child(even){
+
+    transform:rotate(0.7deg);
+
+}
+
+
+.character-card:hover{
+
+    transform:translateY(-8px) scale(1.02);
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.7);
+
+}
+
+
+/*=====================================
+
+クリップ
+
+======================================*/
+
+.character-card::before{
+
+    content:"📎";
+
+    position:absolute;
+
+    left:15px;
+
+    top:8px;
+
+    font-size:30px;
+
+    transform:rotate(-20deg);
+
+    z-index:100;
+
+}
+
+
+/*=====================================
+
+CONFIDENTIAL
+
+======================================*/
+
+.character-card::after{
+
+    content:"CONFIDENTIAL";
+
+    position:absolute;
+
+    right:-40px;
+
+    top:30px;
+
+    width:180px;
+
+    text-align:center;
+
+    padding:6px;
+
+    background:#7a1f23;
+
+    color:white;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    transform:rotate(25deg);
+
+    opacity:.8;
+
+}
+
+
+/*=====================================
+
+画像
+
+======================================*/
+
+.character-image{
+
+    background:#c8bea9;
+
+    padding:25px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-bottom:2px dashed #7c705f;
+
+}
+
+
+.character-image img{
+
+    width:100%;
+
+    height:340px;
+
+    object-fit:contain;
+
+}
+
+
+/*=====================================
+
+情報
+
+======================================*/
 
 .character-info{
 
-    padding:15px;
+    padding:25px;
 
 }
+
+
+/* FILE */
+
+.file-number{
+
+    font-family:"Cinzel",serif;
+
+    color:#6b5641;
+
+    letter-spacing:3px;
+
+    font-size:13px;
+
+}
+
+
+/* 名前 */
 
 .character-name{
 
-    font-size:18px;
+    margin-top:18px;
+
+    font-size:32px;
+
+    font-weight:bold;
 
 }
 
+
+/* ふりがな */
+
+.character-kana{
+
+    margin-top:5px;
+
+    color:#6f675f;
+
+    font-size:14px;
+
+    letter-spacing:2px;
+
 }
 
 
+/* 一言 */
+
+.character-text{
+
+    margin-top:18px;
+
+    line-height:1.8;
+
+    color:#3d3832;
+
+}
 
 
-/* ==========================================
-   詳細ページ
-========================================== */
+/* ボタン */
 
-.detail-container{
+.detail-button{
 
-    width:min(1100px,90%);
-    margin:40px auto 80px;
+    margin-top:25px;
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    background:#2a2a2a;
+
+    color:#ece3cf;
+
+    text-decoration:none;
+
+    border-radius:4px;
+
+    transition:.3s;
+
+    letter-spacing:2px;
+
+}
+
+
+.detail-button:hover{
+
+    background:#5d1f24;
+
+}
+
+
+/*=====================================
+
+古い紙の質感
+
+======================================*/
+
+.character-card{
+
+    background:
+        linear-gradient(rgba(255,255,255,.03),rgba(0,0,0,.05)),
+        #d8ccb8;
+
+}
+
+
+/* 紙のシミ */
+
+.character-card::selection{
+
+    background:#7a1f23;
+
+    color:white;
+
+}
+
+
+/* 紙の角 */
+
+.character-card .paper-corner{
+
+    position:absolute;
+
+    top:0;
+
+    right:0;
+
+    width:70px;
+
+    height:70px;
+
+    background:linear-gradient(
+        135deg,
+        transparent 49%,
+        #b7aa95 50%
+    );
+
+}
+
+
+/*=====================================
+
+画像部分
+
+======================================*/
+
+.character-image{
+
+    position:relative;
+
+}
+
+
+/* ポラロイド風 */
+
+.character-image img{
+
+    background:white;
+
+    padding:12px;
+
+    border:1px solid #999;
+
+    transform:rotate(-2deg);
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,.25);
+
+}
+
+
+/*=====================================
+
+赤いスタンプ
+
+======================================*/
+
+.stamp{
+
+    position:absolute;
+
+    top:18px;
+
+    right:15px;
+
+    border:4px solid #8a1d23;
+
+    color:#8a1d23;
+
+    padding:8px 18px;
+
+    border-radius:100px;
+
+    transform:rotate(20deg);
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    opacity:.28;
+
+    letter-spacing:2px;
+
+}
+
+
+/*=====================================
+
+ファイル番号
+
+======================================*/
+
+.file-number{
+
+    border-bottom:1px dashed #8d816f;
+
+    padding-bottom:10px;
+
+}
+
+
+/*=====================================
+
+名前
+
+======================================*/
+
+.character-name{
+
+    font-size:34px;
+
+    color:#1b1b1b;
+
+    margin-bottom:4px;
+
+}
+
+
+.character-kana{
+
+    color:#555;
+
+}
+
+
+/*=====================================
+
+文章
+
+======================================*/
+
+.character-text{
+
+    margin-top:20px;
+
+    padding-top:15px;
+
+    border-top:1px solid rgba(0,0,0,.2);
+
+    min-height:90px;
+
+}
+
+
+/*=====================================
+
+ボタン
+
+======================================*/
+
+.detail-button{
+
+    width:100%;
+
+    text-align:center;
+
+    margin-top:25px;
+
+    font-family:"Cinzel",serif;
+
+    letter-spacing:4px;
+
+}
+
+
+/*=====================================
+
+ホバー
+
+======================================*/
+
+.character-card:hover img{
+
+    transform:
+
+    rotate(-1deg)
+
+    scale(1.03);
+
+}
+
+
+.character-card:hover .stamp{
+
+    opacity:.45;
+
+}
+
+/*=====================================
+
+資料保管庫
+
+======================================*/
+
+body{
+
+    background:
+        radial-gradient(circle at top,#1a1a1a,#080808 70%);
+
+}
+
+
+/*=====================================
+
+背景の魔法陣
+
+======================================*/
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.03;
+
+    background-image:
+
+    radial-gradient(circle,#ffffff 2px,transparent 2px),
+
+    radial-gradient(circle,#ffffff 1px,transparent 1px);
+
+    background-size:180px 180px;
+
+}
+
+
+/*=====================================
+
+一覧
+
+======================================*/
+
+.character-grid{
+
+    margin-top:60px;
+
+}
+
+
+/*=====================================
+
+カード
+
+======================================*/
+
+.character-card{
+
+    position:relative;
+
+    overflow:visible;
+
+}
+
+
+/* 左のファイルインデックス */
+
+.character-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-14px;
+
+    top:35px;
+
+    width:18px;
+
+    height:90px;
+
+    background:#7d5a36;
+
+    border-radius:4px 0 0 4px;
+
+}
+
+
+/*=====================================
+
+古い紙の線
+
+======================================*/
+
+.character-info{
+
+    position:relative;
+
+}
+
+
+.character-info::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    right:0;
+
+    height:3px;
+
+    background:
+
+    repeating-linear-gradient(
+
+    to right,
+
+    #7d6b57,
+
+    #7d6b57 8px,
+
+    transparent 8px,
+
+    transparent 16px
+
+    );
+
+}
+
+
+/*=====================================
+
+写真
+
+======================================*/
+
+.character-image{
+
+    padding-top:50px;
+
+}
+
+
+.character-image::before{
+
+    content:"PHOTO";
+
+    position:absolute;
+
+    left:18px;
+
+    top:15px;
+
+    color:#73624e;
+
+    font-family:"Cinzel",serif;
+
+    letter-spacing:3px;
+
+    font-size:12px;
+
+}
+
+
+/*=====================================
+
+画像
+
+======================================*/
+
+.character-image img{
+
+    transition:.4s;
+
+}
+
+
+.character-card:hover img{
+
+    transform:
+
+    rotate(-1deg)
+
+    scale(1.08);
+
+}
+
+
+/*=====================================
+
+名前
+
+======================================*/
+
+.character-name{
+
+    position:relative;
+
+}
+
+
+.character-name::after{
+
+    content:"";
+
+    display:block;
+
+    width:70px;
+
+    height:2px;
+
+    background:#7a1f23;
+
+    margin-top:8px;
+
+}
+
+
+/*=====================================
+
+詳細ボタン
+
+======================================*/
+
+.detail-button{
+
+    margin-top:30px;
+
+    border:1px solid #5a4d3d;
+
+}
+
+
+.detail-button:hover{
+
+    background:#7a1f23;
+
+    border-color:#7a1f23;
+
+}
+
+
+/*=====================================
+
+スクロール
+
+======================================*/
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#555;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#888;
+
+}
+
+/*=====================================
+
+REPORT PAGE
+
+======================================*/
+
+.report-container{
+
+    width:min(1300px,94%);
+    margin:50px auto 80px;
 
 }
 
@@ -460,149 +1008,554 @@ footer{
 
     display:inline-block;
 
+    color:#d6c4a3;
+
     text-decoration:none;
-
-    color:white;
-
-    background:#ff9bc1;
-
-    padding:12px 24px;
-
-    border-radius:999px;
-
-    font-weight:700;
 
     margin-bottom:30px;
 
-    transition:.25s;
+    letter-spacing:4px;
 
-    box-shadow:0 8px 18px rgba(0,0,0,.08);
+    transition:.3s;
+
+    font-family:"Cinzel",serif;
 
 }
 
 .back-button:hover{
 
-    transform:translateY(-3px);
-
-    background:#ff7cab;
+    color:white;
 
 }
 
-.detail-card{
 
-    background:white;
+/*==============================
 
-    border-radius:35px;
+紙
+
+==============================*/
+
+.report-paper{
+
+    position:relative;
+
+    background:#ddd2bf;
+
+    color:#1d1d1d;
+
+    padding:70px;
+
+    border-radius:6px;
+
+    box-shadow:
+
+    0 35px 80px rgba(0,0,0,.65);
+
+    overflow:hidden;
+
+}
+
+
+/* 紙の汚れ */
+
+.report-paper::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.08;
+
+    background-image:
+
+    radial-gradient(circle,#000 1px,transparent 1px);
+
+    background-size:22px 22px;
+
+}
+
+
+/*=====================================
+
+クリップ
+
+======================================*/
+
+.paper-clip{
+
+    position:absolute;
+
+    left:25px;
+
+    top:15px;
+
+    width:60px;
+
+    height:25px;
+
+    border:5px solid silver;
+
+    border-radius:40px;
+
+    transform:rotate(-20deg);
+
+}
+
+
+/*=====================================
+
+スタンプ
+
+======================================*/
+
+.confidential{
+
+    position:absolute;
+
+    right:30px;
+
+    top:40px;
+
+    border:5px solid #8c1f28;
+
+    color:#8c1f28;
+
+    padding:10px 22px;
+
+    border-radius:100px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    transform:rotate(18deg);
+
+    opacity:.35;
+
+    letter-spacing:4px;
+
+}
+
+
+/*=====================================
+
+ヘッダー
+
+======================================*/
+
+.report-header{
+
+    border-bottom:2px solid #86745d;
+
+    padding-bottom:25px;
+
+    margin-bottom:40px;
+
+}
+
+.report-code{
+
+    color:#786651;
+
+    font-family:"Cinzel",serif;
+
+    letter-spacing:5px;
+
+    font-size:15px;
+
+}
+
+.report-header h1{
+
+    font-size:48px;
+
+    margin-top:10px;
+
+}
+
+#detailKana{
+
+    color:#555;
+
+    margin-top:10px;
+
+    letter-spacing:3px;
+
+}
+
+
+/*=====================================
+
+本文
+
+======================================*/
+
+.report-main{
 
     display:grid;
 
-    grid-template-columns:420px 1fr;
+    grid-template-columns:360px 1fr;
 
-    gap:45px;
-
-    padding:45px;
-
-    box-shadow:0 18px 40px rgba(0,0,0,.08);
+    gap:60px;
 
 }
 
-.detail-image{
+
+/*=====================================
+
+写真
+
+======================================*/
+
+.photo-area{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    background:#fafafa;
-
-    border-radius:30px;
-
-    padding:30px;
+    align-items:flex-start;
 
 }
 
-.detail-image img{
+.photo-area img{
 
     width:100%;
 
-    max-height:520px;
+    background:white;
 
-    object-fit:contain;
+    padding:12px;
 
-}
+    border:1px solid #999;
 
-.detail-info h2{
+    transform:rotate(-2deg);
 
-    font-size:42px;
+    box-shadow:
 
-    color:#ff7aa8;
-
-    margin-bottom:30px;
-
-}
-
-.detail-item{
-
-    margin-bottom:22px;
-
-}
-
-.detail-item span{
-
-    display:inline-block;
-
-    background:#ffe9f3;
-
-    color:#ff6699;
-
-    padding:8px 16px;
-
-    border-radius:999px;
-
-    font-weight:700;
-
-    margin-bottom:10px;
-
-}
-
-.detail-item p{
-
-    line-height:1.9;
-
-    color:#666;
-
-    font-size:17px;
+    0 10px 25px rgba(0,0,0,.25);
 
 }
 
 
-/* ==========================
+/*=====================================
+
+表
+
+======================================*/
+
+.basic-info h2{
+
+    margin-bottom:20px;
+
+}
+
+.basic-info table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.basic-info th{
+
+    width:170px;
+
+    text-align:left;
+
+    padding:15px;
+
+    border-bottom:1px solid #a69784;
+
+    color:#4d4033;
+
+}
+
+.basic-info td{
+
+    padding:15px;
+
+    border-bottom:1px solid #a69784;
+
+}
+
+
+/*=====================================
+
+文章
+
+======================================*/
+
+.report-section{
+
+    margin-top:50px;
+
+}
+
+.report-section h2{
+
+    margin-bottom:18px;
+
+    border-left:6px solid #7b1e24;
+
+    padding-left:12px;
+
+    font-size:24px;
+
+}
+
+.report-section p{
+
+    line-height:2.2;
+
+}
+
+
+/*=====================================
+
 スマホ
-========================== */
+
+======================================*/
 
 @media(max-width:900px){
 
-.detail-card{
+.report-paper{
+
+    padding:35px;
+
+}
+
+.report-main{
 
     grid-template-columns:1fr;
 
-    padding:30px;
+}
+
+.report-header h1{
+
+    font-size:36px;
 
 }
 
-.detail-image img{
+}
 
-    max-height:350px;
+/*=====================================
+
+フェードイン
+
+======================================*/
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
 
 }
 
-.detail-info h2{
+.character-card{
+
+    animation:fadeUp .8s ease both;
+
+}
+
+.report-paper{
+
+    animation:fadeUp .8s ease both;
+
+}
+
+
+/*=====================================
+
+画像ホバー
+
+======================================*/
+
+.character-image img{
+
+    transition:.4s;
+
+}
+
+.character-card:hover .character-image img{
+
+    transform:
+
+        rotate(-1deg)
+
+        scale(1.05);
+
+}
+
+
+/*=====================================
+
+画像の影
+
+======================================*/
+
+.photo-area img{
+
+    transition:.4s;
+
+}
+
+.photo-area img:hover{
+
+    transform:
+
+        rotate(-1deg)
+
+        scale(1.03);
+
+}
+
+
+/*=====================================
+
+見出し
+
+======================================*/
+
+.report-section h2{
+
+    position:relative;
+
+}
+
+.report-section h2::after{
+
+    content:"";
+
+    display:block;
+
+    width:80px;
+
+    height:2px;
+
+    margin-top:10px;
+
+    background:#8c1f28;
+
+}
+
+
+/*=====================================
+
+本文
+
+======================================*/
+
+.report-section p{
+
+    background:rgba(255,255,255,.12);
+
+    padding:25px;
+
+    border-left:4px solid #7a1f23;
+
+}
+
+
+/*=====================================
+
+表
+
+======================================*/
+
+.basic-info tr:hover{
+
+    background:rgba(0,0,0,.05);
+
+}
+
+
+/*=====================================
+
+ボタン
+
+======================================*/
+
+.back-button{
+
+    padding:10px 20px;
+
+    border:1px solid #655440;
+
+    border-radius:4px;
+
+}
+
+.back-button:hover{
+
+    background:#7a1f23;
+
+}
+
+
+/*=====================================
+
+紙の角
+
+======================================*/
+
+.report-paper::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:0;
+
+    bottom:0;
+
+    width:80px;
+
+    height:80px;
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        transparent 50%,
+
+        #c6baa6 50%
+
+    );
+
+}
+
+
+/*=====================================
+
+フッター
+
+======================================*/
+
+footer{
 
     text-align:center;
 
-    font-size:34px;
+    color:#888;
 
-}
+    padding:40px;
+
+    letter-spacing:3px;
+
+    font-family:"Cinzel",serif;
 
 }
