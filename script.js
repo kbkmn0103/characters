@@ -4,8 +4,6 @@ let filteredCharacters = [];
 const grid = document.getElementById("characterGrid");
 const searchBox = document.getElementById("searchBox");
 
-let currentCategory = "all";
-
 
 // =========================
 // JSON読み込み
@@ -76,10 +74,10 @@ function displayCharacters(list) {
                     ${character.job}
                 </div>
 
-
                 <div class="character-likes">
                     年齢：${character.age}
                 </div>
+
                 <div class="character-likes">
                     身長：${character.tall}
                 </div>
@@ -98,7 +96,35 @@ function displayCharacters(list) {
 
 
 // =========================
-// 検索（名前＋かな対応）
+// ソート（ここが正しい場所）
+// =========================
+
+document.getElementById("sortDefault").addEventListener("click", () => {
+    filteredCharacters = [...characters];
+    displayCharacters(filteredCharacters);
+});
+
+document.getElementById("sortAge").addEventListener("click", () => {
+
+    filteredCharacters = [...characters].sort((a, b) => {
+        return Number(a.age) - Number(b.age);
+    });
+
+    displayCharacters(filteredCharacters);
+});
+
+document.getElementById("sortTall").addEventListener("click", () => {
+
+    filteredCharacters = [...characters].sort((a, b) => {
+        return Number(a.tall) - Number(b.tall);
+    });
+
+    displayCharacters(filteredCharacters);
+});
+
+
+// =========================
+// 検索
 // =========================
 
 searchBox.addEventListener("input", filterCharacters);
