@@ -1,0 +1,608 @@
+/* ==========================
+   全体設定
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family: "M PLUS Rounded 1c", sans-serif;
+
+    background:linear-gradient(
+        180deg,
+        #fff7fb,
+        #f8fbff
+    );
+
+    color:#555;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+
+/* ==========================
+背景
+========================== */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-1;
+
+    overflow:hidden;
+
+}
+
+.circle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(30px);
+
+    opacity:.35;
+
+    animation:float 8s ease-in-out infinite;
+
+}
+
+.circle1{
+
+    width:260px;
+    height:260px;
+
+    background:#ffd6eb;
+
+    top:-80px;
+    left:-60px;
+
+}
+
+.circle2{
+
+    width:300px;
+    height:300px;
+
+    background:#d9f8ff;
+
+    right:-100px;
+    top:120px;
+
+}
+
+.circle3{
+
+    width:260px;
+    height:260px;
+
+    background:#efe1ff;
+
+    bottom:-90px;
+    left:35%;
+
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-25px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+
+/* ==========================
+ヘッダー
+========================== */
+
+header{
+
+    text-align:center;
+
+    padding:60px 20px 40px;
+
+}
+
+.logo h1{
+
+    font-size:3rem;
+
+    color:#ff7aa8;
+
+    font-weight:800;
+
+}
+
+.logo p{
+
+    margin-top:12px;
+
+    color:#777;
+
+    font-size:1.1rem;
+
+}
+
+
+/* ==========================
+検索
+========================== */
+
+.search-area{
+
+    display:flex;
+
+    justify-content:center;
+
+    margin-bottom:35px;
+
+}
+
+#searchBox{
+
+    width:min(500px,90%);
+
+    padding:18px 22px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:50px;
+
+    background:white;
+
+    font-size:17px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+#searchBox:focus{
+
+    transform:scale(1.02);
+
+    box-shadow:
+        0 12px 35px rgba(255,122,168,.25);
+
+}
+
+
+/* ==========================
+カテゴリー
+========================== */
+
+.category-area{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:12px;
+
+    margin-bottom:45px;
+
+}
+
+.category{
+
+    border:none;
+
+    border-radius:999px;
+
+    padding:12px 24px;
+
+    background:white;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.25s;
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,.08);
+
+}
+
+.category:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.category.active{
+
+    background:#ff9bc1;
+
+    color:white;
+
+}
+
+
+/* ==========================
+一覧
+========================== */
+
+main{
+
+    width:min(1250px,92%);
+
+    margin:auto;
+
+    padding-bottom:80px;
+
+}
+
+.character-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    gap:30px;
+
+}
+
+
+/* ==========================
+カード
+========================== */
+
+.character-card{
+
+    background:white;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:
+
+        0 12px 28px rgba(0,0,0,.08);
+
+}
+
+.character-card:hover{
+
+    transform:
+        translateY(-8px)
+        scale(1.03);
+
+    box-shadow:
+
+        0 18px 35px rgba(0,0,0,.12);
+
+}
+
+.character-image{
+
+    width:100%;
+
+    aspect-ratio:1/1;
+
+    background:#fafafa;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.character-image img{
+
+    width:80%;
+
+    height:80%;
+
+    object-fit:contain;
+
+    transition:.35s;
+
+}
+
+.character-card:hover img{
+
+    transform:scale(1.06);
+
+}
+
+
+/* ==========================
+カード本文
+========================== */
+
+.character-info{
+
+    padding:20px;
+
+}
+
+.character-name{
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:#444;
+
+}
+
+.character-category{
+
+    margin-top:10px;
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    background:#ffeef6;
+
+    color:#ff6699;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.character-text{
+
+    margin-top:15px;
+
+    color:#888;
+
+    line-height:1.6;
+
+    font-size:14px;
+
+}
+
+
+/* ==========================
+フッター
+========================== */
+
+footer{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#888;
+
+}
+
+
+/* ==========================
+スマホ
+========================== */
+
+@media(max-width:700px){
+
+.logo h1{
+
+    font-size:2.2rem;
+
+}
+
+.character-grid{
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+.character-info{
+
+    padding:15px;
+
+}
+
+.character-name{
+
+    font-size:18px;
+
+}
+
+}
+
+
+
+
+/* ==========================================
+   詳細ページ
+========================================== */
+
+.detail-container{
+
+    width:min(1100px,90%);
+    margin:40px auto 80px;
+
+}
+
+.back-button{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:#ff9bc1;
+
+    padding:12px 24px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    margin-bottom:30px;
+
+    transition:.25s;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+.back-button:hover{
+
+    transform:translateY(-3px);
+
+    background:#ff7cab;
+
+}
+
+.detail-card{
+
+    background:white;
+
+    border-radius:35px;
+
+    display:grid;
+
+    grid-template-columns:420px 1fr;
+
+    gap:45px;
+
+    padding:45px;
+
+    box-shadow:0 18px 40px rgba(0,0,0,.08);
+
+}
+
+.detail-image{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#fafafa;
+
+    border-radius:30px;
+
+    padding:30px;
+
+}
+
+.detail-image img{
+
+    width:100%;
+
+    max-height:520px;
+
+    object-fit:contain;
+
+}
+
+.detail-info h2{
+
+    font-size:42px;
+
+    color:#ff7aa8;
+
+    margin-bottom:30px;
+
+}
+
+.detail-item{
+
+    margin-bottom:22px;
+
+}
+
+.detail-item span{
+
+    display:inline-block;
+
+    background:#ffe9f3;
+
+    color:#ff6699;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.detail-item p{
+
+    line-height:1.9;
+
+    color:#666;
+
+    font-size:17px;
+
+}
+
+
+/* ==========================
+スマホ
+========================== */
+
+@media(max-width:900px){
+
+.detail-card{
+
+    grid-template-columns:1fr;
+
+    padding:30px;
+
+}
+
+.detail-image img{
+
+    max-height:350px;
+
+}
+
+.detail-info h2{
+
+    text-align:center;
+
+    font-size:34px;
+
+}
+
+}

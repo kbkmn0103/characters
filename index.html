@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Character Garden</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ===========================
+背景
+=========================== -->
+
+<div class="background">
+
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+</div>
+
+
+<!-- ===========================
+ヘッダー
+=========================== -->
+
+<header>
+
+    <div class="logo">
+
+        <h1>Character Garden</h1>
+
+        <p>
+            あなただけのキャラクター図鑑
+        </p>
+
+    </div>
+
+</header>
+
+
+<!-- ===========================
+検索
+=========================== -->
+
+<section class="search-area">
+
+    <input
+        type="text"
+        id="searchBox"
+        placeholder="キャラクターを検索..."
+    >
+
+</section>
+
+
+
+<!-- ===========================
+カテゴリー
+=========================== -->
+
+<section class="category-area">
+
+<button class="category active" data-category="all">
+    ALL
+</button>
+
+<button class="category" data-category="animal">
+    Animal
+</button>
+
+<button class="category" data-category="human">
+    Human
+</button>
+
+<button class="category" data-category="fantasy">
+    Fantasy
+</button>
+
+<button class="category" data-category="other">
+    Other
+</button>
+
+</section>
+
+
+<!-- ===========================
+キャラクター一覧
+=========================== -->
+
+<main>
+
+<div id="characterGrid" class="character-grid">
+
+<!-- JavaScriptで生成 -->
+
+</div>
+
+</main>
+
+
+<!-- ===========================
+フッター
+=========================== -->
+
+<footer>
+
+<p>
+
+© Character Garden
+
+</p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
+
