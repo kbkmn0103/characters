@@ -140,7 +140,6 @@
 <body>
 
 <div class="scanline"></div>
-
 <!-- ローディング -->
 <div class="loading" id="loading">
     <div>DECRYPTING DATA...</div>
@@ -171,16 +170,16 @@
                 <div class="label">読み</div>
                 <div class="value" id="kana"></div>
             </div>
+
             <div class="row">
                 <div class="label">歳</div>
                 <div class="value" id="age"></div>
             </div>
-            
+
             <div class="row">
                 <div class="label">身長</div>
                 <div class="value" id="tall"></div>
             </div>
-
 
             <div class="row">
                 <div class="label">職業</div>
@@ -203,16 +202,18 @@
             </div>
 
         </div>
-        <div class="archive">
-        
-            <div class="archive-header">
-                <div class="label">対象人物アーカイブ（CONFIDENTIAL REPORT）</div>
-            </div>
-        
-        <div class="archive-body" id="history"></div>
+    </div>
 
 </div>
+
+<!-- ⭐ここが重要：containerの外 -->
+<div class="archive">
+
+    <div class="archive-header">
+        <div class="label">対象人物アーカイブ（CONFIDENTIAL REPORT）</div>
     </div>
+
+    <div class="archive-body" id="history"></div>
 
 </div>
 
@@ -221,7 +222,6 @@ const params = new URLSearchParams(location.search);
 const id = params.get("id");
 
 let data = [];
-
 // JSON読み込み
 fetch("characters.json")
     .then(res => res.json())
