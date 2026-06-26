@@ -76,17 +76,11 @@ function displayCharacters(list) {
                     ${character.job}
                 </div>
 
-                <div class="character-profile">
-                    ${character.profile}
-                </div>
 
                 <div class="character-likes">
                     好きなもの：${character.likes}
                 </div>
 
-                <div class="character-story">
-                    ${character.story}
-                </div>
 
             </div>
         `;
