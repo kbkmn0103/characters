@@ -78,9 +78,11 @@ function displayCharacters(list) {
 
 
                 <div class="character-likes">
-                    好きなもの：${character.likes}
+                    年齢：${character.age}
                 </div>
-
+                <div class="character-likes">
+                    身長：${character.tall}
+                </div>
 
             </div>
         `;
