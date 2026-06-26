@@ -1,121 +1,119 @@
 [
-{
-  "id": 1,
-  "kana": "くようせいじ",
-  "name": "九曜 誠司",
-  "thumb": "face/kuyou.png",
-  "image": "images/kuyou.png",
-  "likes": "ようかん",
-  "job": "高校生",
-  "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
-  "story": "■■が消えた夏",
-  "age":18,
-  "tall":174
-},
-
+  {
+    "id": 1,
+    "name": "九曜 誠司",
+    "kana": "くよう せいじ",
+    "thumb": "face/kuyou.png",
+    "image": "images/kuyou.png",
+    "likes": "ようかん",
+    "job": "高校生",
+    "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
+    "story": "■■が消えた夏",
+    "age": 18,
+    "tall": 174
+  },
   {
     "id": 2,
     "name": "大和 楓",
     "kana": "やまと かえで",
     "thumb": "face/kaede.png",
-    "image": "images/kaede.png"
+    "image": "images/kaede.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174
+    "age": 18,
+    "tall": 174
   },
   {
     "id": 3,
     "name": "姫崎 胡桃",
     "kana": "ひめさき くるみ",
     "thumb": "face/kurumi.png",
-    "image": "images/kururmi.png"
+    "image": "images/kurumi.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174
+    "age": 18,
+    "tall": 174
   },
-    {
+  {
     "id": 4,
     "name": "オルフェア",
     "kana": "",
     "thumb": "face/orufe.png",
-    "image": "images/orufe.png"
+    "image": "images/orufe.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174      
+    "age": 18,
+    "tall": 174
   },
-    {
+  {
     "id": 5,
     "name": "レオナルド(リオ)",
     "kana": "",
     "thumb": "face/rio.png",
-    "image": "images/rio.png"
+    "image": "images/rio.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174 
+    "age": 18,
+    "tall": 174
   },
-
   {
     "id": 6,
     "name": "ノア",
     "kana": "",
     "thumb": "face/noa.png",
-    "image": "images/noa.png"
+    "image": "images/noa.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174
+    "age": 18,
+    "tall": 174
   },
   {
     "id": 7,
     "name": "有栖川 凛",
     "kana": "ありすがわ りん",
     "thumb": "face/rio.png",
-    "image": "images/rio.png"
+    "image": "images/rio.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174     
+    "age": 18,
+    "tall": 174
   },
   {
-    "id": 9,
+    "id": 8,
     "name": "弟切 刹那",
     "kana": "おとぎり せつな",
     "thumb": "face/rio.png",
-    "image": "images/rio.png"
+    "image": "images/rio.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174     
+    "age": 18,
+    "tall": 174
   },
-    {
+  {
     "id": 9,
     "name": "柳生 紀章",
     "kana": "やぎゅう としあき",
     "thumb": "face/rio.png",
-    "image": "images/rio.png"
+    "image": "images/rio.png",
     "likes": "ようかん",
     "job": "高校生",
     "profile": "部活の時はメガネを外すタイプの男。メンダコはお揃いのキーホルダー",
     "story": "■■が消えた夏",
-    "age":18,
-    "tall":174       
+    "age": 18,
+    "tall": 174
   }
 ]
