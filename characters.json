@@ -16,7 +16,7 @@
   {
     "id": 2,
     "name": "大和 楓",
-    "kana": "やまと かえで"
+    "kana": "やまと かえで",
     "thumb": "face/kaede.png",
     "image": "images/kaede.png"
     "likes": "ようかん",
@@ -29,7 +29,7 @@
   {
     "id": 3,
     "name": "姫崎 胡桃",
-    "kana": "ひめさき くるみ"
+    "kana": "ひめさき くるみ",
     "thumb": "face/kurumi.png",
     "image": "images/kururmi.png"
     "likes": "ようかん",
@@ -42,7 +42,7 @@
     {
     "id": 4,
     "name": "オルフェア",
-    "kana": ""
+    "kana": "",
     "thumb": "face/orufe.png",
     "image": "images/orufe.png"
     "likes": "ようかん",
@@ -55,7 +55,7 @@
     {
     "id": 5,
     "name": "レオナルド(リオ)",
-    "kana": ""
+    "kana": "",
     "thumb": "face/rio.png",
     "image": "images/rio.png"
     "likes": "ようかん",
@@ -69,7 +69,7 @@
   {
     "id": 6,
     "name": "ノア",
-    "kana": ""
+    "kana": "",
     "thumb": "face/noa.png",
     "image": "images/noa.png"
     "likes": "ようかん",
@@ -82,7 +82,7 @@
   {
     "id": 7,
     "name": "有栖川 凛",
-    "kana": "ありすがわ りん"
+    "kana": "ありすがわ りん",
     "thumb": "face/rio.png",
     "image": "images/rio.png"
     "likes": "ようかん",
@@ -95,7 +95,7 @@
   {
     "id": 9,
     "name": "弟切 刹那",
-    "kana": "おとぎり せつな"
+    "kana": "おとぎり せつな",
     "thumb": "face/rio.png",
     "image": "images/rio.png"
     "likes": "ようかん",
@@ -108,7 +108,7 @@
     {
     "id": 9,
     "name": "柳生 紀章",
-    "kana": "やぎゅう としあき"
+    "kana": "やぎゅう としあき",
     "thumb": "face/rio.png",
     "image": "images/rio.png"
     "likes": "ようかん",
