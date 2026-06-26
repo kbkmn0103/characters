@@ -1,25 +1,242 @@
-[
-{
-  "id": 1,
-  "kana": "くようせいじ",
-  "name": "九曜 誠司",
-  "thumb": "face/kuyou.png",
-  "image": "images/kuyou.png",
-  "likes": "ようかん",
-  "job": "高校生",
-  "profile": "こうこうこういう人物である",
-  "story": "通過したシナリオ"
-},
+<!DOCTYPE html>
+<html lang="ja">
 
-{
-  "id": 2,
-  "kana": "くようせいじ",
-  "name": "九曜 誠司",
-  "thumb": "face/kuyou.png",
-  "image": "images/kuyou.png",
-  "likes": "ようかん",
-  "job": "高校生",
-  "profile": "こうこうこういう人物である",
-  "story": "通過したシナリオ"
-}
-]
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHARACTER FILE</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Noto Serif JP", serif;
+            background: #0b0f14;
+            color: #d6dde6;
+            overflow-x: hidden;
+        }
+
+        /* =====================
+        背景
+        ===================== */
+        .scanline {
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                to bottom,
+                rgba(255,255,255,0.03),
+                rgba(255,255,255,0.03) 1px,
+                transparent 1px,
+                transparent 3px
+            );
+            pointer-events: none;
+            animation: scan 6s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* =====================
+        ヘッダー
+        ===================== */
+        .header {
+            border-bottom: 1px solid #2a3442;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 22px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        /* =====================
+        メイン
+        ===================== */
+        .file {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+        }
+
+        .image-box {
+            border: 1px solid #2a3442;
+            padding: 10px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .image-box img {
+            width: 100%;
+            display: block;
+            filter: contrast(1.1) brightness(0.9);
+        }
+
+        .info {
+            border: 1px solid #2a3442;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .row {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #1d2630;
+            padding-bottom: 10px;
+        }
+
+        .label {
+            font-size: 11px;
+            opacity: 0.6;
+        }
+
+        .value {
+            font-size: 15px;
+            margin-top: 3px;
+        }
+
+        .story {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px dashed #2a3442;
+            background: rgba(0,0,0,0.3);
+            line-height: 1.7;
+        }
+
+        /* =====================
+        ローディング
+        ===================== */
+        .loading {
+            position: fixed;
+            inset: 0;
+            background: #0b0f14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 999;
+        }
+
+        .loading span {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="scanline"></div>
+
+<!-- ローディング -->
+<div class="loading" id="loading">
+    <div>DECRYPTING DATA...</div>
+    <span>loading character file</span>
+</div>
+
+<div class="container">
+
+    <div class="header">
+        <div class="title">CHARACTER FILE</div>
+        <div class="subtitle">CONFIDENTIAL DATABASE ACCESS</div>
+    </div>
+
+    <div class="file">
+
+        <div class="image-box">
+            <img id="charImage" src="" alt="">
+        </div>
+
+        <div class="info">
+
+            <div class="row">
+                <div class="label">NAME</div>
+                <div class="value" id="name"></div>
+            </div>
+
+            <div class="row">
+                <div class="label">KANA</div>
+                <div class="value" id="kana"></div>
+            </div>
+
+            <div class="row">
+                <div class="label">JOB</div>
+                <div class="value" id="job"></div>
+            </div>
+
+            <div class="row">
+                <div class="label">LIKES</div>
+                <div class="value" id="likes"></div>
+            </div>
+
+            <div class="row">
+                <div class="label">PROFILE</div>
+                <div class="value" id="profile"></div>
+            </div>
+
+            <div class="story">
+                <div class="label">STORY LOG</div>
+                <div id="story"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+let data = [];
+
+// JSON読み込み
+fetch("characters.json")
+    .then(res => res.json())
+    .then(json => {
+
+        data = json;
+
+        const character = data.find(c => c.id == id);
+
+        if (!character) {
+            document.body.innerHTML = "<h2>DATA NOT FOUND</h2>";
+            return;
+        }
+
+        document.getElementById("charImage").src = character.image;
+        document.getElementById("name").textContent = character.name;
+        document.getElementById("kana").textContent = character.kana;
+        document.getElementById("job").textContent = character.job;
+        document.getElementById("likes").textContent = character.likes;
+        document.getElementById("profile").textContent = character.profile;
+        document.getElementById("story").textContent = character.story;
+
+        // ローディング消す
+        setTimeout(() => {
+            document.getElementById("loading").style.display = "none";
+        }, 800);
+
+    })
+    .catch(err => {
+        console.error(err);
+        document.body.innerHTML = "<h2>LOAD ERROR</h2>";
+    });
+</script>
+
+</body>
+</html>
