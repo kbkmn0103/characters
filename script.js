@@ -3,12 +3,12 @@ let filteredCharacters = [];
 
 const grid = document.getElementById("characterGrid");
 const searchBox = document.getElementById("searchBox");
-const categoryButtons = document.querySelectorAll(".category");
 
 let currentCategory = "all";
 
+
 // =========================
-// characters.json を読み込む
+// JSON読み込み
 // =========================
 
 fetch("characters.json")
@@ -22,6 +22,7 @@ fetch("characters.json")
 
     })
     .catch(error => {
+
         console.error("JSONの読み込みに失敗しました", error);
 
         grid.innerHTML = `
@@ -33,7 +34,7 @@ fetch("characters.json")
 
 
 // =========================
-// キャラクター一覧表示
+// 一覧表示
 // =========================
 
 function displayCharacters(list) {
@@ -54,12 +55,11 @@ function displayCharacters(list) {
     list.forEach(character => {
 
         const card = document.createElement("div");
-
         card.className = "character-card";
 
         card.innerHTML = `
             <div class="character-image">
-                <img src="${character.image}" alt="${character.name}">
+                <img src="${character.thumb}" alt="${character.name}">
             </div>
 
             <div class="character-info">
@@ -68,12 +68,24 @@ function displayCharacters(list) {
                     ${character.name}
                 </div>
 
-                <div class="character-category">
-                    ${character.category}
+                <div class="character-kana">
+                    ${character.kana}
                 </div>
 
-                <div class="character-text">
-                    ${character.description}
+                <div class="character-job">
+                    ${character.job}
+                </div>
+
+                <div class="character-profile">
+                    ${character.profile}
+                </div>
+
+                <div class="character-likes">
+                    好きなもの：${character.likes}
+                </div>
+
+                <div class="character-story">
+                    ${character.story}
                 </div>
 
             </div>
@@ -86,43 +98,14 @@ function displayCharacters(list) {
         grid.appendChild(card);
 
     });
-
 }
 
 
 // =========================
-// 検索
+// 検索（名前＋かな対応）
 // =========================
 
 searchBox.addEventListener("input", filterCharacters);
-
-
-// =========================
-// カテゴリー
-// =========================
-
-categoryButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        categoryButtons.forEach(btn => {
-            btn.classList.remove("active");
-        });
-
-        button.classList.add("active");
-
-        currentCategory = button.dataset.category;
-
-        filterCharacters();
-
-    });
-
-});
-
-
-// =========================
-// 検索・絞り込み
-// =========================
 
 function filterCharacters() {
 
@@ -133,14 +116,26 @@ function filterCharacters() {
         const matchName =
             character.name.toLowerCase().includes(keyword);
 
-        const matchCategory =
-            currentCategory === "all" ||
-            character.category === currentCategory;
+        const matchKana =
+            character.kana.toLowerCase().includes(keyword);
 
-        return matchName && matchCategory;
+        const matchProfile =
+            character.profile.toLowerCase().includes(keyword);
 
+        const matchJob =
+            character.job.toLowerCase().includes(keyword);
+
+        const matchStory =
+            character.story.toLowerCase().includes(keyword);
+
+        return (
+            matchName ||
+            matchKana ||
+            matchProfile ||
+            matchJob ||
+            matchStory
+        );
     });
 
     displayCharacters(filteredCharacters);
-
 }
