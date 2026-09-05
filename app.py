@@ -1485,3 +1485,6 @@ if page == "管理画面" and is_admin():
 else:
 
     main_page()
+else:
+
+    main_page()
