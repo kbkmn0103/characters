@@ -1325,7 +1325,7 @@ def main_page():
                     st.markdown(f"### {character['name']}")
 
                     if character["player_name"]:
-                        st.caption(f"PL：{character['player_name']}")
+                        st.caption(f"{character['player_name']}")
 
                     if character["description"]:
                         st.write(character["description"])
