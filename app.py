@@ -1411,7 +1411,7 @@ def main_page():
         index=0,
     )
 
-    if sort_direction == "古い順":
+    if sort_direction == "新しい順":
         scenarios = list(reversed(scenarios))
 
     if not scenarios:
