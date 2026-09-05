@@ -1428,7 +1428,7 @@ def main_page():
 
         if st.button(
 
-            f"・{scenario['name']}",
+            f"{scenario['name']}",
 
             key=f"scenario_{scenario['id']}",
 
