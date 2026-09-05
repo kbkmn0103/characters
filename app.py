@@ -1377,7 +1377,10 @@ def main_page():
                     )
 
                 st.divider()
-
+        if scenario.get("continuation_memo"):
+            st.divider()
+            st.subheader("継続シナリオ一覧")
+            st.markdown(scenario["continuation_memo"])
         return
 
     # =====================================================
