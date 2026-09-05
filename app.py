@@ -5,7 +5,56 @@ from pathlib import Path
 
 import streamlit as st
 
+def add_character_to_db(
+    scenario_id,
+    character,
+):
+    conn = get_connection()
 
+    conn.execute("""
+        INSERT INTO characters (
+            scenario_id,
+            name,
+            external_url,
+            image_path,
+            hp,
+            mp,
+            san,
+            luck,
+            str,
+            con,
+            pow,
+            dex,
+            app,
+            siz,
+            int,
+            edu
+        )
+        VALUES (
+            ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?
+        )
+    """, (
+        scenario_id,
+        character["name"],
+        character["external_url"],
+        character["icon_url"],  # ひとまず画像URLを保存
+        character["hp"],
+        character["mp"],
+        character["san"],
+        character["luck"],
+        character["str"],
+        character["con"],
+        character["pow"],
+        character["dex"],
+        character["app"],
+        character["siz"],
+        character["int"],
+        character["edu"],
+    ))
+
+    conn.commit()
+    conn.close()
 # =========================================================
 # 設定
 # =========================================================
@@ -58,13 +107,23 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             scenario_id INTEGER NOT NULL,
             name TEXT NOT NULL,
-            player_name TEXT DEFAULT '',
-            description TEXT DEFAULT '',
+            external_url TEXT DEFAULT '',
             image_path TEXT DEFAULT '',
+            hp TEXT DEFAULT '',
+            mp TEXT DEFAULT '',
+            san TEXT DEFAULT '',
+            luck TEXT DEFAULT '',
+            str TEXT DEFAULT '',
+            con TEXT DEFAULT '',
+            pow TEXT DEFAULT '',
+            dex TEXT DEFAULT '',
+            app TEXT DEFAULT '',
+            siz TEXT DEFAULT '',
+            int TEXT DEFAULT '',
+            edu TEXT DEFAULT '',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (scenario_id)
                 REFERENCES scenarios(id)
-                ON DELETE CASCADE
         )
     """)
 
@@ -74,7 +133,45 @@ def init_db():
 
 init_db()
 
+import json
 
+
+def parse_character_data(text):
+    raw = json.loads(text)
+
+    data = raw["data"]
+
+    # ステータス
+    status = {
+        item["label"]: item["value"]
+        for item in data.get("status", [])
+    }
+
+    # 能力値
+    params = {
+        item["label"]: item["value"]
+        for item in data.get("params", [])
+    }
+
+    return {
+        "name": data.get("name", ""),
+        "icon_url": data.get("iconUrl", ""),
+        "external_url": data.get("externalUrl", ""),
+
+        "hp": status.get("HP", ""),
+        "mp": status.get("MP", ""),
+        "san": status.get("SAN", ""),
+        "luck": status.get("幸運", ""),
+
+        "str": params.get("STR", ""),
+        "con": params.get("CON", ""),
+        "pow": params.get("POW", ""),
+        "dex": params.get("DEX", ""),
+        "app": params.get("APP", ""),
+        "siz": params.get("SIZ", ""),
+        "int": params.get("INT", ""),
+        "edu": params.get("EDU", ""),
+    }
 # =========================================================
 # 管理者認証
 # =========================================================
@@ -366,80 +463,134 @@ def admin_page():
     # -----------------------------------------------------
 
     with tab2:
-        st.subheader("キャラクターを追加")
-
+        st.subheader("キャラクター追加")
+        
         scenarios = get_scenarios()
-
+        
         if not scenarios:
             st.info("先にシナリオを追加してください。")
+        
         else:
-            scenario_options = {
-                scenario["name"]: scenario["id"]
+            scenario_names = [
+                scenario["name"]
                 for scenario in scenarios
-            }
-
+            ]
+        
             selected_name = st.selectbox(
                 "参加シナリオ",
-                list(scenario_options.keys()),
+                scenario_names,
             )
-
-            selected_id = scenario_options[selected_name]
-
-            with st.form("add_character_form"):
-
-                character_name = st.text_input(
-                    "キャラクター名",
-                    placeholder="例：山田 太郎",
+        
+            selected_scenario = next(
+                scenario
+                for scenario in scenarios
+                if scenario["name"] == selected_name
+            )
+        
+            st.markdown(
+                "### ココフォリア等からコマデータを貼り付け"
+            )
+        
+            character_json = st.text_area(
+                "コマデータ",
+                height=250,
+                placeholder='{"kind":"character","data":{...}}',
+                label_visibility="collapsed",
+            )
+        
+            if st.button("データを読み込む"):
+        
+                try:
+                    parsed = parse_character_data(
+                        character_json
+                    )
+        
+                    st.session_state.parsed_character = parsed
+        
+                    st.success("データを読み込みました！")
+        
+                except Exception as e:
+                    st.error(f"データを読み込めませんでした: {e}")
+            if st.session_state.get("parsed_character"):
+            
+                character = st.session_state.parsed_character
+            
+                st.divider()
+            
+                st.subheader("↓ 自動取得")
+            
+                st.markdown(
+                    f"### 名前\n{character['name']}"
                 )
-
-                player_name = st.text_input(
-                    "PL名",
-                    placeholder="例：〇〇さん",
-                )
-
-                description = st.text_area(
-                    "キャラクター説明",
-                    placeholder="キャラクターについてのメモ",
-                )
-
-                uploaded_image = st.file_uploader(
-                    "キャラクター画像",
-                    type=[
-                        "jpg",
-                        "jpeg",
-                        "png",
-                        "webp",
-                    ],
-                )
-
-                submitted = st.form_submit_button(
-                    "キャラクターを追加"
-                )
-
-                if submitted:
-                    if not character_name.strip():
-                        st.error(
-                            "キャラクター名を入力してください。"
+            
+                if character["icon_url"]:
+                    st.image(
+                        character["icon_url"],
+                        width=200,
+                    )
+            
+                if character["external_url"]:
+                    st.link_button(
+                        "キャラクターシートを開く",
+                        character["external_url"],
+                    )
+            
+                st.markdown("### ステータス")
+            
+                col1, col2, col3 = st.columns(3)
+            
+                with col1:
+                    st.metric("HP", character["hp"] or "-")
+            
+                with col2:
+                    st.metric("MP", character["mp"] or "-")
+            
+                with col3:
+                    st.metric("SAN", character["san"] or "-")
+            
+                st.markdown("### 能力値")
+            
+                stats = [
+                    ("STR", character["str"]),
+                    ("CON", character["con"]),
+                    ("POW", character["pow"]),
+                    ("DEX", character["dex"]),
+                    ("APP", character["app"]),
+                    ("SIZ", character["siz"]),
+                    ("INT", character["int"]),
+                    ("EDU", character["edu"]),
+                ]
+            
+                cols = st.columns(4)
+            
+                for i, (label, value) in enumerate(stats):
+            
+                    with cols[i % 4]:
+                        st.metric(
+                            label,
+                            value or "-"
                         )
-                    else:
-                        image_path = save_uploaded_image(
-                            uploaded_image
-                        )
-
-                        add_character(
-                            selected_id,
-                            character_name.strip(),
-                            player_name.strip(),
-                            description.strip(),
-                            image_path,
-                        )
-
-                        st.success(
-                            "キャラクターを追加しました。"
-                        )
-                    
-                        st.rerun()
-
+            
+                st.divider()
+            
+                if st.button(
+                    "このキャラクターを追加",
+                    type="primary",
+                    use_container_width=True,
+                ):
+                    # ↓ ここでDBに保存
+                    add_character_to_db(
+                        selected_scenario["id"],
+                        character,
+                    )
+            
+                    st.session_state.parsed_character = None
+            
+                    st.success(
+                        "キャラクターを追加しました！"
+                    )
+            
+                    st.rerun()
     # -----------------------------------------------------
     # 管理・削除
     # -----------------------------------------------------
