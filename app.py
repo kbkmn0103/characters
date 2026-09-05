@@ -1331,7 +1331,7 @@ def main_page():
                         st.write(character["description"])
 
         # 継続シナリオデータが存在する（空文字やNoneでない）時だけ表示
-        if scenario.get("continuation_memo"):
+        if "continuation_memo" in scenario.keys() and scenario["continuation_memo"]:
             st.divider()
             st.subheader("継続シナリオ一覧")
             st.markdown(scenario["continuation_memo"])
