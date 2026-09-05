@@ -25,7 +25,7 @@ ADMIN_PASSWORD = st.secrets.get("ADMIN_PASSWORD", "admin123")
 
 st.set_page_config(
     page_title="シナリオ・キャラクター一覧",
-    page_icon="📚",
+    page_icon="",
     layout="wide",
 )
 
@@ -129,7 +129,7 @@ def is_admin():
 
 
 def admin_login():
-    st.sidebar.markdown("### 🔐 管理者")
+    st.sidebar.markdown("###  管理者")
 
     if is_admin():
         st.sidebar.success("管理者としてログイン中")
@@ -208,9 +208,9 @@ def get_characters(scenario_id):
 def add_scenario(name, description):
     conn = get_connection()
 
-    # 新しいシナリオは一番下に追加
-    max_order = conn.execute("""
-        SELECT COALESCE(MAX(sort_order), -1)
+    # 新しいシナリオは常に一覧の先頭に追加
+    min_order = conn.execute("""
+        SELECT COALESCE(MIN(sort_order), 0)
         FROM scenarios
     """).fetchone()[0]
 
@@ -225,7 +225,7 @@ def add_scenario(name, description):
     """, (
         name,
         description,
-        max_order + 1,
+        min_order - 1,
     ))
 
     conn.commit()
@@ -498,7 +498,7 @@ def display_character_image(
 
     if not image_path:
 
-        st.write("🖼️")
+        st.write("️")
 
         return
 
@@ -562,7 +562,7 @@ def display_character_image(
 
     else:
 
-        st.write("🖼️")
+        st.write("️")
 
 # =========================================================
 
@@ -582,7 +582,7 @@ if "selected_scenario_id" not in st.session_state:
 
 def admin_page():
 
-    st.title("⚙️ 管理画面")
+    st.title("️ 管理画面")
 
     tab1, tab2, tab3 = st.tabs([
 
@@ -946,7 +946,7 @@ def admin_page():
 
             with st.expander(
 
-                f"📖 {scenario['name']}"
+                f" {scenario['name']}"
 
             ):
 
@@ -1388,7 +1388,7 @@ def main_page():
 
     st.title(
 
-        "📚 シナリオ一覧"
+        " シナリオ一覧"
 
     )
 
@@ -1403,6 +1403,16 @@ def main_page():
     st.divider()
 
     scenarios = get_scenarios()
+
+    sort_direction = st.radio(
+        "並び順",
+        ["降順", "昇順"],
+        horizontal=True,
+        index=0,
+    )
+
+    if sort_direction == "昇順":
+        scenarios = list(reversed(scenarios))
 
     if not scenarios:
 
