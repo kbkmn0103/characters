@@ -1312,75 +1312,30 @@ def main_page():
 
         st.divider()
 
-        st.subheader(
-
-            "参加キャラクター"
-
-        )
-
-        characters = get_characters(
-
-            scenario["id"]
-
-        )
+        st.subheader("参加キャラクター")
+        characters = get_characters(scenario["id"])
 
         if not characters:
+            st.info("このシナリオに登録されているキャラクターはいません。")
+        else:
+            columns = st.columns(3)
+            for index, character in enumerate(characters):
+                with columns[index % 3]:
+                    display_character_image(character["image_path"])
+                    st.markdown(f"### {character['name']}")
 
-            st.info(
+                    if character["player_name"]:
+                        st.caption(f"PL：{character['player_name']}")
 
-                "このシナリオに登録されている"
+                    if character["description"]:
+                        st.write(character["description"])
 
-                "キャラクターはいません。"
-
-            )
-
-            return
-
-        columns = st.columns(3)
-
-        for index, character in enumerate(
-
-            characters
-
-        ):
-
-            with columns[index % 3]:
-
-                display_character_image(
-
-                    character["image_path"]
-
-                )
-
-                st.markdown(
-
-                    f"### {character['name']}"
-
-                )
-
-                if character["player_name"]:
-
-                    st.caption(
-
-                        "PL："
-
-                        f"{character['player_name']}"
-
-                    )
-
-                if character["description"]:
-
-                    st.write(
-
-                        character["description"]
-
-                    )
-
-                st.divider()
+        # 継続シナリオデータが存在する（空文字やNoneでない）時だけ表示
         if scenario.get("continuation_memo"):
             st.divider()
             st.subheader("継続シナリオ一覧")
             st.markdown(scenario["continuation_memo"])
+
         return
 
     # =====================================================
