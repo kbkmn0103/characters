@@ -1406,7 +1406,7 @@ def main_page():
 
     sort_direction = st.radio(
         "並び順",
-        ["降順", "昇順"],
+        ["昇順", "降順"],
         horizontal=True,
         index=0,
     )
