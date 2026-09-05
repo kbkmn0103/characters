@@ -1411,7 +1411,7 @@ def main_page():
         index=0,
     )
 
-    if sort_direction == "昇順":
+    if sort_direction == "古い順":
         scenarios = list(reversed(scenarios))
 
     if not scenarios:
@@ -1482,9 +1482,6 @@ if page == "管理画面" and is_admin():
 
     admin_page()
 
-else:
-
-    main_page()
 else:
 
     main_page()
