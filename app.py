@@ -436,4 +436,288 @@ def admin_page():
 
                         st.success(
                             "キャラクターを追加しました。"
-      
+                        )
+                    
+                        st.rerun()
+
+    # -----------------------------------------------------
+    # 管理・削除
+    # -----------------------------------------------------
+
+    with tab3:
+        st.subheader("データ管理")
+
+        scenarios = get_scenarios()
+
+        if not scenarios:
+            st.info("まだシナリオがありません。")
+            return
+
+        for scenario in scenarios:
+            with st.expander(
+                f"📖 {scenario['name']}"
+            ):
+                st.write(
+                    scenario["description"]
+                    or "説明なし"
+                )
+
+                col1, col2 = st.columns(2)
+
+                # 編集
+                with col1:
+                    st.markdown("#### 編集")
+
+                    edit_name = st.text_input(
+                        "シナリオ名",
+                        value=scenario["name"],
+                        key=f"name_{scenario['id']}",
+                    )
+
+                    edit_description = st.text_area(
+                        "説明",
+                        value=scenario["description"],
+                        key=f"description_{scenario['id']}",
+                    )
+
+                    if st.button(
+                        "変更を保存",
+                        key=f"save_{scenario['id']}",
+                    ):
+                        update_scenario(
+                            scenario["id"],
+                            edit_name,
+                            edit_description,
+                        )
+
+                        st.success("保存しました。")
+                        st.rerun()
+
+                # 削除
+                with col2:
+                    st.markdown("#### 削除")
+
+                    st.warning(
+                        "シナリオを削除すると、"
+                        "参加キャラクターも削除されます。"
+                    )
+
+                    if st.button(
+                        "このシナリオを削除",
+                        key=f"delete_{scenario['id']}",
+                    ):
+                        delete_scenario(
+                            scenario["id"]
+                        )
+
+                        st.success("削除しました。")
+                        st.rerun()
+
+                st.markdown("---")
+
+                st.markdown("#### 登録されているキャラクター")
+
+                characters = get_characters(
+                    scenario["id"]
+                )
+
+                if not characters:
+                    st.info("キャラクターはいません。")
+                else:
+                    for character in characters:
+                        col1, col2 = st.columns(
+                            [1, 4]
+                        )
+
+                        with col1:
+                            if (
+                                character["image_path"]
+                                and Path(
+                                    character["image_path"]
+                                ).exists()
+                            ):
+                                st.image(
+                                    character["image_path"],
+                                    width=120,
+                                )
+                            else:
+                                st.write("🖼️")
+
+                        with col2:
+                            st.write(
+                                f"**{character['name']}**"
+                            )
+
+                            if character["player_name"]:
+                                st.write(
+                                    f"PL：{character['player_name']}"
+                                )
+
+                            if character["description"]:
+                                st.write(
+                                    character["description"]
+                                )
+
+                            if st.button(
+                                "キャラクターを削除",
+                                key=f"delete_character_{character['id']}",
+                            ):
+                                delete_character(
+                                    character["id"]
+                                )
+
+                                st.success(
+                                    "削除しました。"
+                                )
+
+                                st.rerun()
+
+
+# =========================================================
+# メイン画面
+# =========================================================
+
+def main_page():
+
+    # -----------------------------------------------------
+    # シナリオ詳細画面
+    # -----------------------------------------------------
+
+    if st.session_state.selected_scenario_id:
+
+        scenario = get_scenario(
+            st.session_state.selected_scenario_id
+        )
+
+        if scenario is None:
+            st.session_state.selected_scenario_id = None
+            st.rerun()
+
+        if st.button("← シナリオ一覧に戻る"):
+            st.session_state.selected_scenario_id = None
+            st.rerun()
+
+        st.title(scenario["name"])
+
+        if scenario["description"]:
+            st.write(scenario["description"])
+
+        st.divider()
+
+        st.subheader("参加キャラクター")
+
+        characters = get_characters(
+            scenario["id"]
+        )
+
+        if not characters:
+            st.info(
+                "このシナリオに登録されている"
+                "キャラクターはいません。"
+            )
+            return
+
+        # 3列表示
+        columns = st.columns(3)
+
+        for index, character in enumerate(characters):
+
+            with columns[index % 3]:
+
+                if (
+                    character["image_path"]
+                    and Path(
+                        character["image_path"]
+                    ).exists()
+                ):
+                    st.image(
+                        character["image_path"],
+                        use_container_width=True,
+                    )
+                else:
+                    st.markdown(
+                        "### 🖼️"
+                    )
+
+                st.markdown(
+                    f"### {character['name']}"
+                )
+
+                if character["player_name"]:
+                    st.caption(
+                        f"PL：{character['player_name']}"
+                    )
+
+                if character["description"]:
+                    st.write(
+                        character["description"]
+                    )
+
+                st.divider()
+
+        return
+
+    # -----------------------------------------------------
+    # シナリオ一覧
+    # -----------------------------------------------------
+
+    st.title("📚 シナリオ一覧")
+
+    st.write(
+        "シナリオを選択すると、"
+        "参加したキャラクターを見ることができます。"
+    )
+
+    st.divider()
+
+    scenarios = get_scenarios()
+
+    if not scenarios:
+        st.info(
+            "まだシナリオが登録されていません。"
+        )
+        return
+
+    for scenario in scenarios:
+
+        # ボタンを大きく見せる
+        if st.button(
+            f"・{scenario['name']}",
+            key=f"scenario_{scenario['id']}",
+            use_container_width=True,
+        ):
+            st.session_state.selected_scenario_id = (
+                scenario["id"]
+            )
+            st.rerun()
+
+
+# =========================================================
+# サイドバー
+# =========================================================
+
+st.sidebar.markdown("---")
+
+if is_admin():
+
+    page = st.sidebar.radio(
+        "ページ",
+        [
+            "シナリオ一覧",
+            "管理画面",
+        ],
+    )
+
+else:
+
+    page = "シナリオ一覧"
+
+
+# =========================================================
+# 表示
+# =========================================================
+
+if page == "管理画面" and is_admin():
+    admin_page()
+else:
+    main_page()
